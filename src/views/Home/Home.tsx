@@ -5,10 +5,13 @@ import fetchApi from '../../utils/fetch';
 import TodaysImage from '../../components/TodaysImage';
 import {PostImage} from '../../types';
 import {format, sub} from 'date-fns';
+import LastFiveDaysImages from '../../components/LastFiveDaysImages';
 
 const Home = () => {
   //Se tipa el useStage al PostImage
   const [todaysImage, setTodaysImage] = useState<PostImage>({});
+  //Si es un arreglo
+  const [lastFiveDaysImage, setLastFiveDaysImage] = useState<PostImage[]>([]);
 
   useEffect(() => {
     const loadTodaysImage = async () => {
@@ -18,6 +21,7 @@ const Home = () => {
         setTodaysImage(todayImageResponse);
       } catch (error) {
         console.log(error);
+        //Se pone en el useState de  todayImage para hacer uso despues con el.
         setTodaysImage({});
       }
     };
@@ -34,8 +38,7 @@ const Home = () => {
         const lastFiveDaysImagesResponse = await fetchApi(
           `&start_date=${fiveDaysAgoDate}&end_date=${todaysDate}`,
         );
-
-        console.log(lastFiveDaysImagesResponse);
+        setLastFiveDaysImage(lastFiveDaysImagesResponse);
       } catch (error) {
         console.log(error);
       }
@@ -49,6 +52,7 @@ const Home = () => {
     <View style={styles.container}>
       <Header />
       <TodaysImage {...todaysImage} />
+      <LastFiveDaysImages />
     </View>
   );
 };
