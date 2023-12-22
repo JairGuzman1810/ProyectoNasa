@@ -52,7 +52,8 @@ const Home = () => {
     <View style={styles.container}>
       <Header />
       <TodaysImage {...todaysImage} />
-      <LastFiveDaysImages />
+      {/* En este caso se usa como el nombre de la variable para que se pueda identificar mejor */}
+      <LastFiveDaysImages PostImages={lastFiveDaysImage} />
     </View>
   );
 };
