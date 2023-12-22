@@ -8,3 +8,8 @@ export type PostImage = {
   url?: string;
 };
 //Se pone el ? para que sea opcional.
+
+export type RootStackParams = {
+  Home: undefined;
+  Detail: undefined;
+};

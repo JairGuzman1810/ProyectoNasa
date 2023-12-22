@@ -6,13 +6,15 @@
  */
 
 import React from 'react';
-import {Platform, SafeAreaView, StyleSheet} from 'react-native';
-import Home from './src/views/Home'; //Se llama la carpeta Home, y por defecto agarra index
+import {SafeAreaView, StyleSheet} from 'react-native';
+//import Home from './src/views/Home'; //Se llama la carpeta Home, y por defecto agarra index
+import Routes from './src/routes';
 
 function App(): React.JSX.Element {
   return (
     <SafeAreaView style={styles.container}>
-      <Home />
+      {/* Routes nos sirve para redireccionar */}
+      <Routes />
     </SafeAreaView>
   );
 }
@@ -20,8 +22,6 @@ function App(): React.JSX.Element {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#071A5D',
-    paddingTop: Platform.OS === 'android' ? 30 : 0, //ASI SE PONE EN REACT NATIVE
   },
 });
 
