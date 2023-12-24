@@ -1,8 +1,17 @@
 import React, {FC} from 'react';
 import {Button, Image, StyleSheet, Text, View} from 'react-native';
-import {PostImage} from '../../types';
-
-const TodaysImage: FC<PostImage> = ({date, title, url}) => {
+import {PostImage, RootStackParams} from '../../types';
+import {useNavigation} from '@react-navigation/native';
+import {StackNavigationProp} from '@react-navigation/stack';
+//Se tiene que tipar el stacknavigation con los parametros que se le van a pasar, o modelo.
+type PostImageNavigationProps = StackNavigationProp<RootStackParams, 'Detail'>;
+const TodaysImage: FC<PostImage> = ({date, title, url, explanation}) => {
+  //Se usara hooks para realizar el movimiento de pantallas.
+  const {navigate} = useNavigation<PostImageNavigationProps>();
+  //Se pueden usar const de flecha para las funciones/metodos.
+  const handleViewPress = () => {
+    navigate('Detail', {title, date, url, explanation});
+  };
   return (
     <View style={styles.container}>
       <View>
@@ -12,7 +21,7 @@ const TodaysImage: FC<PostImage> = ({date, title, url}) => {
       <Text style={styles.title}>{title}</Text>
       <Text style={styles.date}>{date}</Text>
       <View style={styles.buttoncontainer}>
-        <Button title="View" />
+        <Button title="View" onPress={handleViewPress} />
       </View>
       {/* Ocupa un view, porque directamente no se pueden aplicar estilos. */}
     </View>
